@@ -92,3 +92,16 @@ Collaborating takes a ton of practice!
 
 ## Merge conflicts
 Oftentimes you will run into this for various reasons, such as two people working on the same file.  The best way to resolve this is to pull the code like normal to your machine, and look at it in VS Code or STS.  There you can decide what to keep and what to leave out.  Alternately you can resolve the conflicts on GitHub's site, although the interface isn't as good.  How you do it is up to you.  Stay in touch, especially if there's a merge conflict!  Talk to your fellow group members if there's a problem that arises due to a conflict.
+
+## Debugging: what if you accidentally push stuff to GitHub?
+
+If you ever run into the scenario where you accidentally push stuff to GitHub that shouldn't be there, don't panic!  If you want to just undo the history WITHOUT removing any files locally on your machine, here's how:
+
+1. Type `git log` to look at your commit history.  Each commit will say `commit 0123456789abcdef`, where you have an SHA hash that essentially represents an ID of that timestamp of your history.  Pick out the one you want to revert to, and copy its SHA.
+2. Run `git reset the_id_you_want_here` to bring your repository's version of the repo back to that point.  This will NOT update on GitHub yet!  Don't worry, your files should still be there.
+3. Run `git push -f` to force a push.  This will revert the commit on GitHub for good.
+
+More info here: https://www.atlassian.com/git/tutorials/undoing-changes
+
+## Other commands that you might find useful:
+- `git stash`: Temporarily stashes stuff you added to the staging area via `git add`.  More info here: https://www.atlassian.com/git/tutorials/saving-changes/git-stash
