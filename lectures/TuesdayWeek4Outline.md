@@ -28,6 +28,6 @@
         - Root node, leaf nodes
         - Size of a tree
         - Parent vs. child vs. sibling nodes
-        - Balanced (full) trees
+        - Balanced and full trees
     - Adding a node
     - Three different ways to traverse a tree (if there's time)
