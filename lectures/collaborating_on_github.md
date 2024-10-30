@@ -94,11 +94,11 @@ Collaborating takes a ton of practice!
 Oftentimes you will run into this for various reasons, such as two people working on the same file.  The best way to resolve this is to pull the code like normal to your machine, and look at it in VS Code or STS.  There you can decide what to keep and what to leave out.  Alternately you can resolve the conflicts on GitHub's site, although the interface isn't as good.  How you do it is up to you.  Stay in touch, especially if there's a merge conflict!  Talk to your fellow group members if there's a problem that arises due to a conflict.
 
 ## Debugging: what if you accidentally add files to the staging area but did NOT commit them yet in your repository on your computer?
-You can use the command `git reset file_to_remove` or `git reset .` to remove changes.  Don't worry, your files won't go anywhere.
+You can use the command `git reset file_to_remove` or `git reset .` to remove changes.  Don't worry, your files won't go anywhere on your computer; they only get removed from the staging area (where your files go when you run `git add`).
 
 ## Debugging: what if you accidentally added files and committed them but did NOT push to GitHub yet?
 1. Type `git log` to look at your commit history.  Each commit will say something along the lines of `commit 0123456789abcdef`, where you have an SHA hash consisting of hexadecimal characters (so 0-9, and the letters A-F) that follows the word `commit` that essentially represents an ID of that timestamp of your history.  Pick out the one you want to revert to, and copy its SHA.
-2. Run `git reset the_id_you_want_here` to bring your repository's version of the repo back to that point.  Don't worry, your files should still be there on your computer.
+2. Run `git reset the_id_you_want_here` to bring your repository's version of the repo back to that point.  Your newest commit will no longer be part of your history.  (Technically, that's not 100% accurate, as the newest commit is effectively orphaned, meaning there's no direct connection.  Git will delete it interally via garbage collection within 30 days.)  Don't worry, your files should still be there on your computer.
 
 ## Debugging: what if you accidentally push stuff to GitHub?
 
@@ -110,7 +110,9 @@ If you ever run into the scenario where you accidentally push stuff to GitHub th
 
 More info here: https://www.atlassian.com/git/tutorials/undoing-changes
 
-(You can alternately try a different command called `git revert` which creates a new commit [timestamp] while going back to a previous version of your repository.  In other words, the commit that was undone is still part of your history, whereas the newest commit is basically a previous commit.  The command `git reset` allows you to change your history.  So `git reset` is more useful if you want to permanently undo stuff that you don't want in your history - particularly on GitHub, especially if you accidentally push stuff like secret keys, passwords, other credentials, etc.)
+(You can alternately try a different command called `git revert` which creates a new commit [timestamp] while going back to a previous version of your repository.  In other words, the commit that was undone is still part of your history, whereas the newest commit is basically a previous commit.  The command `git reset` allows you to change your history.  So `git reset` is more useful if you want to permanently undo stuff that you don't want in your history - particularly on GitHub, especially if you accidentally push stuff like secret keys, passwords, other credentials, etc.
+
+Be a bit careful with using `git reset`, though.  `git revert` is actually more often used in a real-life setting, as `git reset` is considered a more dangerous command that ideally should only be used for your local version of the repository and not the repository on GitHub.  You can find more info here on reset vs. revert: https://www.atlassian.com/git/tutorials/undoing-changes/git-revert.)
 
 ## Other commands that you might find useful:
 - `git stash`: Temporarily stashes stuff you added to the staging area via `git add`.  More info here: https://www.atlassian.com/git/tutorials/saving-changes/git-stash
