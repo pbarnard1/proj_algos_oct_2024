@@ -34,6 +34,47 @@ class BST { // Binary search tree itself
             }
         }
     }
+
+    /** This comment is a JS Doc comment
+     * @param {BSTNode} [currentNode=this.root] The root node for the current tree or subtree (default is the root of the tree)
+     * @returns integer holding the size of the tree
+     */
+    size(currentNode = this.root) {
+        if (currentNode === null) { // No node, so we've hit a dead end - stop the recursion
+            return 0;
+        }
+        // Count the number of nodes to the left of the current node
+        let nodeCountLeft = this.size(currentNode.left);
+        let nodeCountRight = this.size(currentNode.right); // Similar deal to the right
+        return nodeCountLeft + nodeCountRight + 1; // Note the + 1 to count the root node
+    }
+
+    inOrder(currentNode = this.root) { // In-order traversal
+        if (currentNode === null) { // We hit a dead end (no node)
+            return;
+        }
+        this.inOrder(currentNode.left); // Go to the left recursively
+        console.log(currentNode.data); // Now print out the current node's value
+        this.inOrder(currentNode.right); // Go to the right recursively
+    }
+
+    preOrder(currentNode = this.root) { // Pre-order traversal
+        if (currentNode === null) { // We hit a dead end (no node)
+            return;
+        }
+        console.log(currentNode.data); // Print out the current node's value
+        this.preOrder(currentNode.left); // Go to the left recursively
+        this.preOrder(currentNode.right); // Go to the right recursively
+    }
+
+    postOrder(currentNode = this.root) { // Post-order traversal
+        if (currentNode === null) { // We hit a dead end (no node)
+            return;
+        }
+        this.postOrder(currentNode.left); // Go to the left recursively
+        this.postOrder(currentNode.right); // Go to the right recursively
+        console.log(currentNode.data); // Print out the current node's value
+    }
 }
 // Adding nodes to the tree
 let firstTree = new BST();
@@ -47,3 +88,13 @@ firstTree.addNode(new BSTNode(7));
 console.log(firstTree);
 firstTree.addNode(new BSTNode(15));
 console.log(firstTree);
+
+// Testing counting the number of nodes in the tree
+console.log(firstTree.size());
+// Testing the three traversals
+console.log("In-order traversal:");
+firstTree.inOrder();
+console.log("Pre-order traversal:");
+firstTree.preOrder();
+console.log("Post-order traversal:");
+firstTree.postOrder();
